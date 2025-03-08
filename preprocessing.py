@@ -32,12 +32,12 @@ def preprocess_images(csv_file, output_file, is_test=False):
         image_path = os.path.join(DATASET_PATH, row["Path"])  
 
         if not os.path.exists(image_path):
-            print(f"⚠️ Warning: File not found - {image_path}")
+            print(f"Warning: File not found - {image_path}")
             continue
 
         img = cv2.imread(image_path)
         if img is None:
-            print(f"⚠️ Warning: Could not read {image_path}")
+            print(f"Warning: Could not read {image_path}")
             continue
 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
@@ -48,7 +48,7 @@ def preprocess_images(csv_file, output_file, is_test=False):
             labels.append(row["ClassId"])  # Assign label only for Train
 
     if len(images) == 0:
-        print(f"❌ Error: No images processed from {csv_file}!")
+        print(f"Error: No images processed from {csv_file}!")
         return
 
     # Convert to tensors
@@ -60,7 +60,7 @@ def preprocess_images(csv_file, output_file, is_test=False):
     else:
         torch.save(images_tensor, os.path.join(PREPROCESSED_DIR, output_file))
 
-    print(f"✅ Preprocessing completed for {output_file}. Saved in {PREPROCESSED_DIR}.")
+    print(f"Preprocessing completed for {output_file}. Saved in {PREPROCESSED_DIR}.")
 
 # Run preprocessing
 preprocess_images(TRAIN_CSV, "Train_processed.pt", is_test=False)
