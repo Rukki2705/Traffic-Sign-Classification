@@ -29,7 +29,7 @@ def preprocess_images(csv_file, output_file, is_test=False):
     labels = []
 
     for index, row in tqdm(df.iterrows(), total=len(df), desc=f"Processing {csv_file}"):
-        image_path = os.path.join(DATASET_PATH, row["Path"])  # Fix: Use full path from CSV
+        image_path = os.path.join(DATASET_PATH, row["Path"])  
 
         if not os.path.exists(image_path):
             print(f"⚠️ Warning: File not found - {image_path}")
